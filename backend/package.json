@@ -1,0 +1,20 @@
+{
+    "name": "remote-executor",
+    "type": "module",
+    "version": "1.0.0",
+    "main": "./src/index.js",
+    "description": "Backend of a remote executor application, which can execute code remotely and return the output, inspired by leetcode",
+    "scripts": {
+        "start": "node .",
+        "dev": "nodemon ."
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2"
+    },
+    "author": {
+        "name": "Jatin Sharma",
+        "email": "jatinsharma9038@gmail.com"
+    }
+}
