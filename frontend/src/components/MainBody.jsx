@@ -8,13 +8,13 @@ import PageNotFound from "../Pages/PageNotFound";
 
 const MainBody = () => {
     return (
-        <main className="px-24 py-3 w-full flex flex-col flex-auto h-fit overflow-scroll">
+        <main className="px-24 py-3 w-full flex flex-col flex-auto flex-shrink-0 h-fit overflow-x-hidden">
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="blogs" element={<Blog />} />
                 <Route path="practise" element={<Practise />} />
                 <Route path="login" element={<LogIn />} />
-                <Route path="signin" element={<SignIn />} />
+                <Route path="signup" element={<SignIn />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
         </main>
