@@ -1,3 +1,5 @@
+import Courses from "../components/Courses";
+
 const Home = () => {
     return (
         <>
@@ -18,14 +20,10 @@ const Home = () => {
                     </p>
                 </div>
             </div>
-            <div className="flex my-6 py-6 items-center justify-start flex-wrap">
+            {/* The component below could be improved using sliding gallary */}
+            <div className="flex my-6 py-6 items-center justify-between flex-wrap">
                 {[...Array(20).keys()].map((item) => {
-                    return (
-                        <div
-                            key={item}
-                            className="p-4 my-2 rounded-xl flex items-center justify-center w-56 h-64 bg-gray-200"
-                        ></div>
-                    );
+                    return <Courses key={item} />;
                 })}
             </div>
         </>
