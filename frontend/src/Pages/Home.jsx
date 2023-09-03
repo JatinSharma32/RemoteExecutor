@@ -21,9 +21,9 @@ const Home = () => {
                 </div>
             </div>
             {/* The component below could be improved using sliding gallary */}
-            <div className="flex my-6 py-6 items-center justify-between flex-wrap">
-                {[...Array(20).keys()].map((item) => {
-                    return <Courses key={item} />;
+            <div className="flex my-2 py-2 items-center justify-between flex-wrap">
+                {[...Array(21).keys()].map((item) => {
+                    return <Courses key={item} url={item} />;
                 })}
             </div>
         </>

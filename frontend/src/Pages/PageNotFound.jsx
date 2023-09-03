@@ -2,7 +2,7 @@ const PageNotFound = () => {
     return (
         <div className="flex justify-center items-center h-full">
             <img
-                src="404_face.png"
+                src="./404_face.png"
                 alt="The page you are looking for dosen't exists."
                 className="h-2/5 m-3"
             />
