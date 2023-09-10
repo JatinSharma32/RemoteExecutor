@@ -13,7 +13,9 @@ const MainBody = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="blogs" element={<Blog />} />
-                <Route path="practise" element={<Practise />} />
+                <Route path="practise" element={<Practise />}>
+                    <Route path="?page=10" element={<Practise />} />
+                </Route>
                 <Route path="login" element={<LogIn />} />
                 <Route path="signup" element={<SignIn />} />
                 <Route path="pagenotfound" element={<PageNotFound />} />

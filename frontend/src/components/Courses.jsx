@@ -10,7 +10,6 @@ const Courses = ({ url }) => {
         CourseColorCombinations[
             Math.floor(Math.random() * CourseColorCombinations.length)
         ];
-    console.log(bgColors);
     const style = `py-4 my-6 rounded-2xl flex items-center shadow-md justify-center w-80 h-72 bg-gradient-to-br ${bgColors?.light} ${bgColors?.dark} hover:shadow-xl overflow-hidden`;
     return (
         <div className="overflow-hidden max-h-96 p-7">
