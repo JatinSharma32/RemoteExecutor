@@ -25,7 +25,7 @@ const Practise = () => {
             setQuestions(data.data.data);
             console.log(data.data.data);
         });
-    }, []);
+    }, [searchParams]);
 
     return (
         <div className="flex flex-col h-full">
