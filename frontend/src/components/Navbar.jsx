@@ -9,7 +9,9 @@ const Navbar = () => {
                 </Link>
                 <ul className="h-fit flex items-center">
                     <NavBarTitle to="/">Explore</NavBarTitle>
-                    <NavBarTitle to="/practise">Practise</NavBarTitle>
+                    <NavBarTitle to="/practise?size=10&pageSet=0">
+                        Practise
+                    </NavBarTitle>
                     <NavBarTitle to="/blogs">Blogs</NavBarTitle>
                     <NavBarTitle to="/hkjks">Contest</NavBarTitle>
                     <NavBarTitle to="/ghiukn">Discuss</NavBarTitle>
