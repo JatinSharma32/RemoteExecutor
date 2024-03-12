@@ -609,7 +609,8 @@ export const QuestionsList = (req, res, next) => {
         const { size, pageSet } = req.query;
         // validation
         // there may be possible error in this condition for array indexing
-        if (Number.parseInt(pageSet) + Number.parseInt(size) > data.length) {
+        // bug fix >=
+        if (Number.parseInt(pageSet) + Number.parseInt(size) >= data.length) {
             res.status(200).json({
                 data: data.slice(
                     data.length - size,

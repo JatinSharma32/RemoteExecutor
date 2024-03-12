@@ -34,13 +34,13 @@ const Practise = () => {
                 searchParams.get("size")
             )}&pageSet=${validatePageSet(searchParams.get("pageSet"))}`,
         }).then((data) => {
-            setQuestions(data.data.data);
             if (data.data.end) {
                 setDataEnd(true);
             } else {
                 setDataEnd(false);
             }
-        });
+            setQuestions(data.data.data);
+        }).catch;
     }, [searchParams]);
 
     return (
