@@ -4,6 +4,7 @@ const CourseColorCombinations = [
     { light: "from-yellow-100", dark: "to-green-400" },
     { light: "from-blue-50", dark: "to-blue-400" },
     { light: "from-yellow-100", dark: "to-amber-400" },
+    { light: "from-pink-200", dark: "to-purple-400" },
 ];
 const Courses = ({ url }) => {
     const bgColors =
@@ -41,7 +42,10 @@ const Courses = ({ url }) => {
             <Link
                 to={`/course/${url}`}
                 className="h-16 rounded-full w-16 bg-white border-4 border-slate-300 flex items-center drop-shadow-xl justify-center cursor-pointer  hover:scale-105 bottom-36 left-56 relative z-10"
-            ></Link>
+            >
+                {" "}
+                View
+            </Link>
         </div>
     );
 };

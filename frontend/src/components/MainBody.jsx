@@ -3,7 +3,8 @@ import Home from "../Pages/Home";
 import Blog from "../Pages/Blog";
 import Practise from "../Pages/Practise";
 import LogIn from "../Pages/LogIn";
-import SignIn from "../Pages/SignIn";
+import SignUp from "../Pages/SignUp";
+import Terminal from "../Pages/Terminal";
 import PageNotFound from "../Pages/PageNotFound";
 import CoursePage from "../Pages/CoursePage";
 
@@ -17,8 +18,9 @@ const MainBody = () => {
                     <Route path="?page=10" element={<Practise />} />
                 </Route>
                 <Route path="login" element={<LogIn />} />
-                <Route path="signup" element={<SignIn />} />
+                <Route path="signup" element={<SignUp />} />
                 <Route path="pagenotfound" element={<PageNotFound />} />
+                <Route path="terminal" element={<Terminal />} />
                 <Route path="course/:id" element={<CoursePage />} />
                 <Route
                     path="*"

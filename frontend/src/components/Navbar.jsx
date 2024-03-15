@@ -12,15 +12,6 @@ const Navbar = () => {
                     <NavBarTitle to="/practise?size=10&pageSet=0">
                         Practise
                     </NavBarTitle>
-                    <NavBarTitle to="/blogs">Blogs</NavBarTitle>
-                    <NavBarTitle to="/hkjks">Contest</NavBarTitle>
-                    <NavBarTitle to="/ghiukn">Discuss</NavBarTitle>
-                    <NavBarTitle to="/bhjgtuik">
-                        <DropDownList>Interview</DropDownList>
-                    </NavBarTitle>
-                    <NavBarTitle to="/hknkjs">
-                        <DropDownList color={"pro"}>Store</DropDownList>
-                    </NavBarTitle>
                 </ul>
             </div>
             <div className=" flex items-center text-sm text-gray-500 h-full">
@@ -38,10 +29,10 @@ const Navbar = () => {
                     Sign in
                 </Link>
                 <Link
-                    to="/pre"
+                    to="/terminal"
                     className=" align-baseline  text-amber-500  hover:bg-orange-100 rounded-lg mx-1 ml-2 px-3 h-4/6 font-medium bg-orange-50 flex items-center"
                 >
-                    Premium
+                    Code
                 </Link>
             </div>
         </div>

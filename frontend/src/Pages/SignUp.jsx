@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const LogIn = () => {
+const SignUp = () => {
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
 
@@ -19,6 +20,18 @@ const LogIn = () => {
                 </h3>
             </div>
             <form onSubmit={handleSubmit} className="flex flex-col w-full my-2">
+                <span>
+                    <input
+                        type="text"
+                        name="Username"
+                        value={username}
+                        placeholder="Username"
+                        className="w-full my-2 py-3 px-4 rounded-md font-extralight border-x border-y"
+                        onChange={(e) => {
+                            setUsername(e.target.value);
+                        }}
+                    />
+                </span>
                 <span>
                     <input
                         type="text"
@@ -51,13 +64,13 @@ const LogIn = () => {
             </form>
             <div>
                 <p className="text-sm text-gray-400 font-light">
-                    New user?
-                    <Link to="/signup" className="text-blue-900 text-base ml-1">
-                        Sign Up
+                    Have an account?
+                    <Link to="/login" className="text-blue-900 text-base ml-1">
+                        Sign In
                     </Link>
                 </p>
             </div>
         </div>
     );
 };
-export default LogIn;
+export default SignUp;
