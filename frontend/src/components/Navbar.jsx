@@ -8,7 +8,7 @@ const Navbar = () => {
                     <img src="/Design.png" className="w-7 rounded-sm" />
                 </Link>
                 <ul className="h-fit flex items-center">
-                    <NavBarTitle to="/">Explore</NavBarTitle>
+                    <NavBarTitle to="/#explore">Explore</NavBarTitle>
                     <NavBarTitle to="/practise?size=10&pageSet=0">
                         Practise
                     </NavBarTitle>

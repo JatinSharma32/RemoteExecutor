@@ -29,6 +29,8 @@ const CoursePage = () => {
                         className="shadow-lg rounded-md"
                     />
                     <a
+                        target="_blank"
+                        rel="noreferrer"
                         className="mt-5 relative  flex items-center justify-center h-20 w-20 rounded-full p-2 bottom-16 left-6 text-white italic text-lg animate-pulse"
                         href="https://www.youtube.com/watch?v=FpfHmAkRVK4"
                         style={{
@@ -45,12 +47,15 @@ const CoursePage = () => {
                     <style>{`
                         @keyframes Gradient {
                             0% {
+                                scale: 1;
                                 background-position: 0% 50%;
                             }
                             50% {
+                                scale: 1.2;
                                 background-position: 100% 50%;
                             }
                             100% {
+                                scale: 1;
                                 background-position: 0% 50%;
                             }
                         }

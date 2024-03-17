@@ -1,6 +1,16 @@
+import { useLocation } from "react-router-dom";
 import Courses from "../components/Courses";
+import { useEffect } from "react";
 
 const Home = () => {
+    const { hash } = useLocation();
+
+    useEffect(() => {
+        if (hash === "#explore") {
+            document.getElementById("explore").scrollIntoView();
+        }
+    }, [hash]);
+
     return (
         <>
             <div className="w-full h-min flex  items-center bg-gradient-to-br justify-center rounded-3xl drop-shadow-2xl from-slate-600 to-slate-950 p-14 text-gray-200 overflow-hidden">
@@ -21,7 +31,10 @@ const Home = () => {
                 </div>
             </div>
             {/* The component below could be improved using sliding gallary */}
-            <div className="flex my-2 py-2 items-center justify-between flex-wrap">
+            <div
+                id="explore"
+                className="flex my-2 py-2 items-center justify-between flex-wrap"
+            >
                 {[...Array(21).keys()].map((item) => {
                     return <Courses key={item} url={item} />;
                 })}
