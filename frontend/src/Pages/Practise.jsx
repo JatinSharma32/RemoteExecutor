@@ -93,17 +93,12 @@ const Practise = () => {
                                     text: data.diffculity,
                                     color: Diffculity.get(data.diffculity),
                                 };
+                                console.log("question data: ", data);
                                 return (
                                     <QuestionRow
                                         key={i}
                                         diffculity={diffculity}
                                         data={data}
-                                        index={
-                                            i +
-                                            parseInt(
-                                                searchParams.get("pageSet")
-                                            )
-                                        }
                                     />
                                 );
                             })
