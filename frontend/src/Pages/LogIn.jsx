@@ -45,7 +45,7 @@ const LogIn = () => {
                 </span>
                 <span>
                     <button className="w-full my-2 text-white bg-gradient-to-bl from-slate-500 to-slate-800 py-3 px-4 rounded-md">
-                        Sign Up
+                        Sign In
                     </button>
                 </span>
             </form>

@@ -1,41 +1,29 @@
 import { Link } from "react-router-dom";
-const CourseColorCombinations = [
-    { light: "from-amber-100", dark: "to-red-500" },
-    { light: "from-yellow-100", dark: "to-green-400" },
-    { light: "from-blue-50", dark: "to-blue-400" },
-    { light: "from-yellow-100", dark: "to-amber-400" },
-    { light: "from-pink-200", dark: "to-purple-400" },
-];
+
 const Courses = ({ url }) => {
-    const bgColors =
-        CourseColorCombinations[
-            Math.floor(Math.random() * CourseColorCombinations.length)
-        ];
-    const style = `py-4 my-6 rounded-2xl flex items-center shadow-md justify-center w-80 h-72 bg-gradient-to-br ${bgColors?.light} ${bgColors?.dark} hover:shadow-xl overflow-hidden`;
+    const TotalImages = 4;
+    const style = `py-4 my-6 rounded-2xl flex flex-col items-center shadow-md justify-center w-80 h-72 bg-gradient-to-br bg-[length:350px_210px] bg-no-repeat  hover:shadow-xl overflow-hidden`;
     return (
         <div className="overflow-hidden max-h-96 p-7">
-            <div className={style}>
-                <div className="w-full  text-center flex h-24 bg-white relative items-start justify-evenly shadow-inner top-28">
+            <div
+                className={style}
+                style={{
+                    backgroundImage: `url('/Homepage/${Math.floor(
+                        Math.random() * TotalImages
+                    )}.png')`,
+                }}
+            >
+                <div className="relative w-full px-4 py-1 font-semibold drop-shadow-lg text-white text-4xl bottom-8">
+                    Course Name
+                </div>
+                <div className="w-full  text-center flex h-24 bg-white relative items-start justify-start pl-6 pt-2 shadow-inner top-20">
                     <div className="p-2">
                         <h3 className="text-2xl font-semibold">
                             {Math.ceil(Math.random() * 20)}
                         </h3>
                         <p className="text-sm text-gray-500 font-light">
-                            Chapters
+                            Total Chapters
                         </p>
-                    </div>
-                    <div className="p-2">
-                        <h3 className="text-2xl font-semibold">
-                            {Math.ceil(Math.random() * 200)}
-                        </h3>
-                        <p className="text-sm text-gray-500 font-light">
-                            Items
-                        </p>
-                    </div>
-                    <div className="p-2 relative top-7">
-                        <h3 className=" text-gray-500">
-                            {Math.ceil(Math.random() * 100)}%
-                        </h3>
                     </div>
                 </div>
             </div>
