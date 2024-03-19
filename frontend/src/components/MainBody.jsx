@@ -7,6 +7,7 @@ import SignUp from "../Pages/SignUp";
 import Terminal from "../Pages/Terminal";
 import PageNotFound from "../Pages/PageNotFound";
 import CoursePage from "../Pages/CoursePage";
+import Problem from "../Pages/Problem";
 
 const MainBody = () => {
     return (
@@ -14,9 +15,8 @@ const MainBody = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="blogs" element={<Blog />} />
-                <Route path="practise" element={<Practise />}>
-                    <Route path="?page=10" element={<Practise />} />
-                </Route>
+                <Route path="practise" element={<Practise />}></Route>
+                <Route path="problem/:id" element={<Problem />}></Route>
                 <Route path="login" element={<LogIn />} />
                 <Route path="signup" element={<SignUp />} />
                 <Route path="pagenotfound" element={<PageNotFound />} />

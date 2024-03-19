@@ -1,11 +1,17 @@
-const Questions = ({ data, diffculity, index }) => {
+import { Link } from "react-router-dom";
+
+const Questions = ({ data, diffculity }) => {
+    console.log(data);
     return (
-        <tr className={index % 2 === 0 ? "bg-white" : "bg-slate-100"}>
-            <td className="p-3 w-52">{index + 1}.</td>
+        <tr className={data.index % 2 === 0 ? "bg-white" : "bg-slate-100"}>
+            <td className="p-3 w-52">{data.index}.</td>
             <td className="p-3 w-1/2">
-                <a href="/cscs" className="hover:text-blue-600">
+                <Link
+                    to={`/problem/${data.index}`}
+                    className="hover:text-blue-600"
+                >
                     {data.title}
-                </a>
+                </Link>
             </td>
             <td className="p-3 w-52">
                 <a href={data.solution} target="_blank" rel="noreferrer">
