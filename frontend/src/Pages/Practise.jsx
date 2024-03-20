@@ -80,9 +80,6 @@ const Practise = () => {
                             <th className="p-3 text-gray-500 font-light w-52">
                                 Diffculity
                             </th>
-                            <th className="p-3 text-gray-500 font-light w-52">
-                                Status
-                            </th>
                         </tr>
                     </thead>
                     <tbody className="text-black font-normal text-sm">
@@ -93,7 +90,6 @@ const Practise = () => {
                                     text: data.diffculity,
                                     color: Diffculity.get(data.diffculity),
                                 };
-                                console.log("question data: ", data);
                                 return (
                                     <QuestionRow
                                         key={i}

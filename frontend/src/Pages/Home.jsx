@@ -1,8 +1,10 @@
 import { useLocation } from "react-router-dom";
 import Courses from "../components/Courses";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Axios from "axios";
 
 const Home = () => {
+    const [courseData, setCourseData] = useState(null);
     const { hash } = useLocation();
 
     useEffect(() => {
@@ -10,6 +12,11 @@ const Home = () => {
             document.getElementById("explore").scrollIntoView();
         }
     }, [hash]);
+
+    useEffect(() => {
+        // complete it
+        Axios({ url });
+    }, []);
 
     return (
         <>

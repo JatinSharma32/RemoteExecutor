@@ -1,5 +1,5 @@
 import { errorHandler } from "../utils/errorHandler.js";
-import data from "../../db/courses.json" assert { type: "json" };
+import data from "../../db/problems.json" assert { type: "json" };
 
 export const QuestionsList = (req, res, next) => {
     try {

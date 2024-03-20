@@ -6,5 +6,5 @@ export const createError = (msg, statusCode) => {
 
 export const errorHandler = (res, error) => {
     console.log("Error: ", error);
-    res.statusCode(error.statusCode).json({ error: error.message });
+    res.status(error.statusCode).json({ error: error.message });
 };
