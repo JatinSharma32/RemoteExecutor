@@ -2,6 +2,7 @@
     {
         "courseName": "Chai aur Javascript",
         "link": "https://www.youtube.com/playlist?list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+        "chapters": 51,
         "thumbnail": "https://i.ytimg.com/vi/Hr5iLG7sUa0/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLDLoKvnXHFWBiQ62EyKv82Enfjxyw",
         "courseDescription": [
             "Chai aur Javascript is a standout online series that masterfully breaks down the fundamentals of JavaScript programming for beginners, all in accessible Hindi language. ",
@@ -10,8 +11,23 @@
         ]
     },
     {
+        "courseName": "C++ A complete and modern course",
+        "link": "https://www.youtube.com/watch?v=FpfHmAkRVK4",
+        "chapters": 1,
+        "thumbnail": "https://i.ytimg.com/vi/FpfHmAkRVK4/maxresdefault.jpg",
+        "courseDescription": [
+            "This is a data structures and algorithms (DSA) course with a strong focus on passing coding interviews for software engineering jobs.",
+            "Most DSA courses - including those offered in universities, tend to concentrate on theoretical concepts that don't matter in an interview. Most of the time, these courses present zero or few examples of problems you would see in an interview.",
+            "This course takes a very pragmatic approach to teaching DSA. The course is primarily taught through examples - it includes hundreds of carefully curated problems that show up in actual interviews. These examples are delivered through a balanced mix of walkthroughs and exercises. You will learn by doing.",
+            "Everything you need to pass coding interviews is here in one place. We will not dwell on theoretical details or waste time on concepts that won't help you pass an interview. The goal of this course is to get you a job, not pass an exam.",
+            "Regardless of your initial skill level, you should be comfortable with preparing for and passing coding interviews at tech companies after taking this course. If your target is top-tier companies like FAANG, taking this course will set you up with all the fundamentals necessary to prepare for those interviews.",
+            "The course is split up into 13 chapters. The bulk of the content is within chapters 2 - 11, each of which focuses on a data structure or algorithm - Arrays and strings - Hashmaps and sets - Linked lists - Stacks and queues - Trees and graphs - Heaps - Greedy algorithms - Binary search - Backtracking - Dynamic programming"
+        ]
+    },
+    {
         "courseName": "Chai aur React",
         "link": "https://www.youtube.com/playlist?list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
+        "chapters": 34,
         "thumbnail": "https://i.ytimg.com/vi/vz1RlUyrc3w/maxresdefault.jpg",
         "courseDescription": [
             "React is a JavaScript library for rendering user interfaces (UI). UI is built from small units like buttons, text, and images. React lets you combine them into reusable, nestable components. From web sites to phone apps, everything on the screen can be broken down into components. In this chapter, you will learn to create, customize, and conditionally display React components.",
@@ -21,6 +37,7 @@
     {
         "courseName": "Complete Git & GitHub Tutorial",
         "link": "https://www.youtube.com/watch?v=apGV9Kg7ics",
+        "chapters": 1,
         "thumbnail": "https://i.ytimg.com/vi/apGV9Kg7ics/maxresdefault.jpg",
         "courseDescription": [
             "This tutorial will help you with using Git & GitHub for your personal projects and contributing to Open Source, with no prerequisites, in an easy to understand language.",
@@ -38,9 +55,10 @@
         ]
     },
     {
-        "courseName": "Namaste Javascript ",
+        "courseName": "Namaste Javascript",
         "link": "https://www.youtube.com/playlist?list=PLxnjbfm5MCHFbRlyVCAqpJFdIzPN_IPID",
-        "thumbnail": "https://i.ytimg.com/vi/pN6jk0uUrD8/sddefault.jpg",
+        "chapters": 26,
+        "thumbnail": "https://i.ytimg.com/vi/78Homn79Qsk/maxresdefault.jpg",
         "courseDescription": [
             "Namaste Javascript Video tutorials will dive deep into JavaScript and the internals of how code is executed under the hood. If you understand the core fundamentals of JavaScript, it will help you become a better developer. You will exactly know how things are working and won't run into unexpected errors.",
             "Namaste JavaScript Video Course will be 100% free and will be released on Youtube. The playlist will be updated with new JavaScript tutorial videos every week. The plan is to cover all the important concepts in JS including the tricky ones like Closures, Prototypal Inheritance, Promise, Event Loop.",
@@ -48,8 +66,9 @@
         ]
     },
     {
-        "courseName": "Algorithms ",
+        "courseName": "Algorithms",
         "link": "https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O",
+        "chapters": 84,
         "thumbnail": "https://i.ytimg.com/vi/0IAPZzGSbME/maxresdefault.jpg",
         "courseDescription": [
             "Abdul Bari's 'Algorithms' is a comprehensive YouTube playlist designed to guide learners through the complex world of algorithms. The course covers a wide range of topics, from basic algorithmic concepts to advanced data structures and algorithms. ",
@@ -59,6 +78,7 @@
     {
         "courseName": "Web Authentication Methods",
         "link": "https://www.youtube.com/watch?v=LB_lBMWH4-s",
+        "chapters": 1,
         "thumbnail": "https://i.ytimg.com/vi/LB_lBMWH4-s/maxresdefault.jpg",
         "courseDescription": [
             "How does Authentication on the Web work? And what types of Authentication are available to Web Developers? In this video, we are going to explore methods such as Web Authentication API aka WebAuthn, Multi-Factor Authentication, Authentication with JWT or Cookies, Passwordless Authentication, and so on with thorough explanations.",
@@ -75,6 +95,7 @@
     {
         "courseName": "Token vs Session Authentication",
         "link": "https://www.youtube.com/watch?v=QzntvHz23tw",
+        "chapters": 1,
         "thumbnail": "https://i.ytimg.com/vi/QzntvHz23tw/maxresdefault.jpg",
         "courseDescription": [
             "'Token vs Session Authentication' is a comparison of two popular methods used for maintaining user state in web applications.",
@@ -86,6 +107,7 @@
     {
         "courseName": "Right way to code",
         "link": "https://www.youtube.com/watch?v=8L5kVBays24",
+        "chapters": 1,
         "thumbnail": "https://i.ytimg.com/vi/8L5kVBays24/maxresdefault.jpg",
         "courseDescription": [
             "The 'Right Way to Code' is about adopting best practices in programming and avoiding the trap of 'tutorial hell'. Tutorial hell refers to the situation where a learner gets stuck in a cycle of only following tutorials, without ever applying the knowledge to their own projects or problems.",

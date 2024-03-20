@@ -6,6 +6,7 @@ import Axios from "axios";
 const Home = () => {
     const [courseData, setCourseData] = useState(null);
     const { hash } = useLocation();
+    const URI = "http://localhost:4000/course/home";
 
     useEffect(() => {
         if (hash === "#explore") {
@@ -14,37 +15,57 @@ const Home = () => {
     }, [hash]);
 
     useEffect(() => {
-        // complete it
-        Axios({ url });
+        Axios({ url: URI })
+            .then((data) => {
+                setCourseData(data.data);
+                console.log(data.data);
+            })
+            .catch((error) => {
+                console.log("Error occured in loading courses data: ", error);
+            });
     }, []);
 
     return (
         <>
-            <div className="w-full h-min flex  items-center bg-gradient-to-br justify-center rounded-3xl drop-shadow-2xl from-slate-600 to-slate-950 p-14 text-gray-200 overflow-hidden">
+            <div className="w-full h-min flex items-center bg-gradient-to-br justify-center rounded-3xl drop-shadow-2xl from-slate-600 to-slate-950 p-14 text-gray-200 overflow-hidden">
                 <img
                     src="./Design.png"
                     alt="Remote executer Logo"
                     className="w-48 p-4 logoBounce"
                 />
-                <div className="flex flex-col flex-shrink-0 items-center text-center m-4 px-8 w-2/4">
+                <div className="flex flex-col flex-shrink-0 items-center text-center m-4 px-8 w-8/12">
                     <h2 className="text-3xl text-gray-50 py-2">
-                        A New Way to Learn
+                        Welcome to our Online Coding Environment
                     </h2>
                     <p className="py-2 text-gray-400">
-                        Remote Executer is the best platform to help you enhance
-                        your skills, expand your knowledge and prepare for
-                        technical interviews.
+                        Tired of the hassle of installing compilers,
+                        interpreters, and setting up a coding environment? We
+                        have got you covered! With our platform, you can focus
+                        on coding while we handle all the setup and
+                        configuration for you. Stay up-to-date with the latest
+                        languages and technologies without the headache of
+                        manual setup.
+                    </p>
+                    <p className="py-2 text-gray-400">
+                        <span className="text-white">Below </span>
+                        are the free resources that helped me learn programming.
                     </p>
                 </div>
             </div>
-            {/* The component below could be improved using sliding gallary */}
+            {/* The component below could be improved using sliding gallery */}
             <div
                 id="explore"
                 className="flex my-2 py-2 items-center justify-between flex-wrap"
             >
-                {[...Array(21).keys()].map((item) => {
-                    return <Courses key={item} url={item} />;
-                })}
+                {courseData && courseData.length > 0 ? (
+                    courseData.map((item, i) => {
+                        return <Courses key={i} course={item} />;
+                    })
+                ) : (
+                    <div className="loader">
+                        <img src="/Design.png" alt="Remote Executer Logo" />
+                    </div>
+                )}
             </div>
         </>
     );
