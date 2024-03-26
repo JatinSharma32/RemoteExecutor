@@ -57,12 +57,14 @@ const Home = () => {
                 id="explore"
                 className="flex my-2 py-2 items-center justify-between flex-wrap"
             >
-                {courseData && courseData.length > 0 ? (
-                    courseData.map((item, i) => {
+                {courseData &&
+                courseData.courseList &&
+                courseData.courseList.length > 0 ? (
+                    courseData.courseList.map((item, i) => {
                         return <Courses key={i} course={item} />;
                     })
                 ) : (
-                    <div className="loader">
+                    <div className="contentloader">
                         <img src="/Design.png" alt="Remote Executer Logo" />
                     </div>
                 )}

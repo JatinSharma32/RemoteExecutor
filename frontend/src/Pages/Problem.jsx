@@ -126,7 +126,7 @@ const Problem = () => {
                     </Link>
                 </div>
             ) : (
-                <div className="loader">
+                <div className="contentloader">
                     <img src="/Design.png" alt="Remote Executer Logo" />
                 </div>
             )}
