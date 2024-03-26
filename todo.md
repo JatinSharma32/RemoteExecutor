@@ -10,22 +10,15 @@
 ## Where I left last time:
 
 -   Designed the functionality of code execution move forward with it
+-   Added `@monaco-editor/react` in the terminal page, **Cursor Bug pending**
 
 ---
 
--   Research this `exec()` method for executing various file codes and read [Remote Ex Code](https://github.com/Tushar3099/Remote-Executor/blob/main/rce-server/server/api/services/code.service.js).
-    ```js
-    import { exec } from "child_process";
-    exec("cd backend && npm run dev", function (error, stdout, stderr) {
-        console.log("stdout: " + stdout);
-        console.log("stderr: " + stderr);
-        if (error !== null) {
-            console.log("exec error: " + error);
-        }
-    });
-    ```
--   Next start with the [Terminal page](https://blog.logrocket.com/build-web-editor-with-react-monaco-editor/#monaco-editor) and Fix the minor bugs in UI and
+-   Solve the cursor bug and text highlighting in code editor.
+-   Add change language button and output screen in Terminal page.
+-   Add basic backend for code execution.
 -   User Authentication, add token checking on Main.jsx so user automatically gets logged in.
--   Improve the backend architecture
+-   Read [Remote Ex Code](https://github.com/Tushar3099/Remote-Executor/blob/main/rce-server/server/api/services/code.service.js).
+-   Improve the backend architecture.
 -   If issues faced while working with Text editor, we can ask user to upload their code files.
 -   Solve the Multiple Request Error, multiple unwanted automatic requests to the routes.
