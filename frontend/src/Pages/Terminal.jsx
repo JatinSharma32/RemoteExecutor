@@ -7,18 +7,19 @@ const Terminal = () => {
     const [code, setCode] = useState(
         "// Your code here\nconsole.log('Hello World!')"
     );
+    const [outputPending, setOutputPending] = useState(false);
     const [input, setInput] = useState("");
     const [output, setOutput] = useState("");
-
+    const [language, setLanguage] = useState("javascript");
     /**
      * SERVER ERROR: 2
      * CODE ERROR: 1
      * NO ERROR: 0
      */
     const [outputError, setOutputError] = useState(null);
-    const [language, setLanguage] = useState("javascript");
 
     const handleSubmit = () => {
+        setOutputPending(true);
         Axios({
             url: "http://localhost:4000/executor/",
             method: "post",
@@ -30,24 +31,21 @@ const Terminal = () => {
             },
         })
             .then((data) => {
-                if (data.data.error) {
-                    setOutput("SERVER ERROR: " + data.data.codeError);
-                    setOutputError("bg-red-200 border-red-500 text-red-600");
+                setOutputPending(false);
+                console.log(data.data);
+                setOutput(data.data.output);
+                if (data.data.codeError) {
+                    setOutputError(
+                        "bg-orange-200 border-orange-700 text-red-600"
+                    );
                 } else {
-                    console.log(data.data);
-                    setOutput(data.data.output);
-                    if (data.data.codeError) {
-                        setOutputError(
-                            "bg-orange-200 border-orange-700 text-red-600"
-                        );
-                    } else {
-                        setOutputError(
-                            "bg-green-200 border-green-700 text-black"
-                        );
-                    }
+                    setOutputError("bg-green-200 border-green-700 text-black");
                 }
             })
             .catch((err) => {
+                setOutputPending(false);
+                setOutput("SERVER ERROR: " + err.response?.data?.error);
+                setOutputError("bg-red-200 border-red-500 text-red-600");
                 console.log("Error occured: ", err);
             });
     };
@@ -75,10 +73,21 @@ const Terminal = () => {
                     onChange={handleLanguageChange}
                     className="p-3 m-2 my-5 w-40 rounded-full bg-slate-100 "
                 >
-                    <option value="javascript">JavaScript</option>
-                    <option value="java">Java</option>
-                    <option value="cpp">C++</option>
-                    <option value="python">Python</option>
+                    <option
+                        value="javascript"
+                        selected={language === "javascript"}
+                    >
+                        JavaScript
+                    </option>
+                    <option value="java" selected={language === "java"}>
+                        Java
+                    </option>
+                    <option value="cpp" selected={language === "cpp"}>
+                        C++
+                    </option>
+                    <option value="python" selected={language === "python"}>
+                        Python
+                    </option>
                 </select>
                 <FileUpload
                     setCode={setCode}
@@ -126,12 +135,21 @@ const Terminal = () => {
                     ></textarea>
                 </div>
             </div>
-            <button
-                onClick={code ? handleSubmit : null}
-                className="w-full mt-2 text-white bg-gradient-to-bl from-slate-500 to-slate-800 py-3 px-4 rounded-md"
-            >
-                Submit
-            </button>
+            {outputPending ? (
+                <button
+                    onClick={code ? handleSubmit : null}
+                    className="w-full mt-2 text-white bg-gradient-to-bl from-slate-300 to-slate-700 py-3 px-4 rounded-md animate-pulse"
+                >
+                    Pending...
+                </button>
+            ) : (
+                <button
+                    onClick={code ? handleSubmit : null}
+                    className="w-full mt-2 text-white bg-gradient-to-bl from-slate-500 to-slate-800 py-3 px-4 rounded-md"
+                >
+                    Submit
+                </button>
+            )}
         </div>
     );
 };
