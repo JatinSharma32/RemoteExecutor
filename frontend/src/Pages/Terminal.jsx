@@ -69,7 +69,6 @@ const Terminal = () => {
                 <select
                     name="language"
                     id="selectLanguage"
-                    defaultValue="javascript"
                     onChange={handleLanguageChange}
                     className="p-3 m-2 my-5 w-40 rounded-full bg-slate-100 "
                 >
@@ -129,17 +128,14 @@ const Terminal = () => {
                         id="output"
                         cols="80"
                         rows="10"
-                        readOnly="false"
+                        readOnly={false}
                         value={output}
                         placeholder="Submit your code..."
                     ></textarea>
                 </div>
             </div>
             {outputPending ? (
-                <button
-                    onClick={code ? handleSubmit : null}
-                    className="w-full mt-2 text-white bg-gradient-to-bl from-slate-300 to-slate-700 py-3 px-4 rounded-md animate-pulse"
-                >
+                <button className="w-full mt-2 text-white bg-gradient-to-bl from-yellow-300 to-red-500 py-3 px-4 rounded-md animate-pulse">
                     Pending...
                 </button>
             ) : (

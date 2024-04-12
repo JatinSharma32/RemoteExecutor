@@ -11,11 +11,11 @@
 ## Where I left last time:
 
 -   Docker research, and architecutre of code execution feature redesign.
+-   Add a Loader or some indication for user to convey the execution status
+-   Take unser input along with user code, then store both as a file directly in container.
 
 ---
 
--   Add a Loader or some indication for user to convey the execution status
--   Take unser input along with user code, then store both as a file directly in container.
 -   Solve the cursor bug and text highlighting in code editor.
 -   For reference read [**Remote Ex Code**](https://github.com/Tushar3099/Remote-Executor/blob/main/rce-server/server/api/services/code.service.js).
 -   User Authentication, add token checking on Main.jsx so user automatically gets logged in.

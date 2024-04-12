@@ -1,4 +1,5 @@
 import { createError } from "../utils/errorHandler.js";
+import { javaClassName } from "../utils/javaClassNameExtractor.js";
 import { exec } from "child_process";
 import { Buffer } from "buffer";
 
@@ -119,6 +120,13 @@ class ExecutionService {
             case "cpp":
                 this.codeFileName = `code.cpp`;
                 this.codeExecution_CMD = `cd home && g++ code.cpp -o useroutputfile && ./useroutputfile <input.txt && rm *`;
+                break;
+            case "java":
+                this.codeFileName = `code.java`;
+
+                this.codeExecution_CMD = `cd home && javac code.java && java ${javaClassName(
+                    code
+                )} <input.txt && rm *`;
                 break;
 
             default:
