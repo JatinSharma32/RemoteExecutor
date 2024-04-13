@@ -2,33 +2,19 @@ import { createError } from "../utils/errorHandler.js";
 import { javaClassName } from "../utils/javaClassNameExtractor.js";
 import { exec } from "child_process";
 import { Buffer } from "buffer";
-
-// we will get the code from controller, which will pass it to argument
-/**
- *                          CONTAINER STARTUP PHASE
- * We will run/start the container in this phase.
- *
- *                          FILE CREATION PHASE
- * Then we will make a code and a input file directly into container
- * how we will store them by using echo command and also we wll convert them into base64 first
- *
- *                          CODE EXECUTION PHASE
- * Then we will execute the code with using '<' operator to pass input in code.
- *
- *                          CLEANUP PHASE
- * Here we'll stop and remove the container.
- *
- * Do this step in any error state
- *
- */
-
+import { v4 as uuidv4 } from "uuid";
 class ExecutionService {
     codeFileName;
     codeExecution_CMD;
+    #containerName;
+    #imageName =
+        "8be8b370c9d31251b8291d82a8d40ebfdcbd15730969dad94e6da26a839000bb";
     containerStartUp = async (user) => {
         return new Promise((resolve, reject) => {
             exec(
-                `docker start ${user.containerName}`,
+                `docker run -it -d -m 100m --name ${this.#containerName} ${
+                    this.#imageName
+                }`,
                 (error, stdout, stderr) => {
                     if (error) {
                         reject(createError("Container creation error", 500));
@@ -42,7 +28,9 @@ class ExecutionService {
     fileCreation = async (user, fileCreation_CMD) => {
         return new Promise((resolve, reject) => {
             exec(
-                `docker exec ${user.containerName} sh -c "${fileCreation_CMD}"`,
+                `docker exec ${
+                    this.#containerName
+                } sh -c "${fileCreation_CMD}"`,
                 (error, stdout, stderr) => {
                     if (error) {
                         reject("Code file creation error");
@@ -56,7 +44,9 @@ class ExecutionService {
     codeExecution = async (user) => {
         return new Promise((resolve, reject) => {
             exec(
-                `docker exec ${user.containerName} sh -c "${this.codeExecution_CMD}"`,
+                `docker exec ${this.#containerName} sh -c "${
+                    this.codeExecution_CMD
+                }"`,
                 (error, stdout, stderr) => {
                     if (error) {
                         resolve({ codeError: true, output: stderr });
@@ -70,7 +60,9 @@ class ExecutionService {
     containerStop = async (user) => {
         return new Promise((resolve, reject) => {
             exec(
-                `docker stop ${user.containerName}`,
+                `docker stop ${this.#containerName} && docker rm ${
+                    this.#containerName
+                }`,
                 (error, stdout, stderr) => {
                     if (error) {
                         console.log(
@@ -86,6 +78,7 @@ class ExecutionService {
         });
     };
     exe = async (code, input, language, user) => {
+        this.#containerName = `${user.containerName}${uuidv4()}`;
         const containerStartUpExecution = await this.containerStartUp(user);
         if (containerStartUpExecution) {
             try {
