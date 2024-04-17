@@ -3,8 +3,8 @@
 -   [x] Course Page
 -   [x] Course Cards
 -   [x] Problem Page
--   [ ] Teriminal Page
--   [ ] Code Execution Backend
+-   [x] Teriminal Page
+-   [x] Code Execution Backend
 -   [ ] User Authentication
 -   [ ] Responsiveness (OPTIONAL)
 
@@ -14,15 +14,17 @@
 -   Add a Loader or some indication for user to convey the execution status
 -   Take user input along with user code, then store both as a file directly in container.
 -   Solved the cursor bug and text highlighting in code editor.
+-   Try if you can upload this image on to the hub.docker.com
 
 ---
 
--   Try if you can upload this image on to the hub.docker.com
 -   User Authentication, add token checking on Main.jsx so user automatically gets logged in.
+-   Add a USP, to provide 3rd party packages install in container, as no one provides, also increased container size.
 -   Deploy the frontend and then develop along and also build a CICD pipeline
 -   Improve the backend architecture.
 -   add a functionality for user to request their choice of language compiler.
--   `(OPTIONAL):` Add a premimum feature with razorpay
+-   `(OPTIONAL):` Add a premimum feature on USP with razorpay
+-   Dark theme
 -   Solve the Multiple Request Error, multiple unwanted automatic requests to the routes.
 
 ## References
