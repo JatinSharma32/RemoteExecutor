@@ -1,6 +1,10 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
+import { useAuth } from "../contexts/authContext.jsx";
 
 const Navbar = () => {
+    const { username } = useAuth();
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(username, user);
     return (
         <div className="border-b border-b-slate-200 h-fit w-full px-24 shadow-sm flex justify-between items-center flex-initial flex-shrink-0 ">
             <div className=" h-fit flex items-center flex-initial flex-shrink-0 ">
@@ -15,6 +19,11 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className=" flex items-center text-sm text-gray-500 h-full">
+                {(username || user?.username) && (
+                    <p className="py-2 px-4 bg-green-100 mr-10 rounded-md">
+                        Logged in as {username || user?.username}
+                    </p>
+                )}
                 <Link
                     to="/signup"
                     className="hover:text-black mx-1 px-1 font-light"
@@ -35,38 +44,6 @@ const Navbar = () => {
                     Code
                 </Link>
             </div>
-        </div>
-    );
-};
-
-const DropDownList = ({ color, children }) => {
-    return (
-        <div className="flex items-center">
-            {color ? (
-                <font className="text-amber-500">{children}</font>
-            ) : (
-                <font>{children}</font>
-            )}
-
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="1em"
-                height="1em"
-                fill="currentColor"
-                className={
-                    color
-                        ? "ml-1 h-[14px] w-[14px] text-amber-500 relative"
-                        : "ml-1 h-[14px] w-[14px] text-inherit relative"
-                }
-                aria-hidden="true"
-            >
-                <path
-                    fillRule="evenodd"
-                    d="M4.929 7.913l7.078 7.057 7.064-7.057a1 1 0 111.414 1.414l-7.77 7.764a1 1 0 01-1.415 0L3.515 9.328a1 1 0 011.414-1.414z"
-                    clipRule="evenodd"
-                ></path>
-            </svg>
         </div>
     );
 };

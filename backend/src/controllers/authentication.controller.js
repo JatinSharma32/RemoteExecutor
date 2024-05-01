@@ -1,6 +1,6 @@
 import { createUser, findUser } from "../models/userModel.js";
 import { createError, errorHandler } from "../utils/errorHandler.js";
-import { createToken, verifyToken } from "../utils/JWTUtilities.js";
+import { createToken } from "../utils/JWTUtilities.js";
 
 export const registerController = async (req, res, next) => {
     try {
@@ -13,6 +13,7 @@ export const registerController = async (req, res, next) => {
         res.status(200).json({
             message: "Account created Successfully",
             token: token,
+            user: userCreated,
         });
     } catch (error) {
         errorHandler(res, error);
@@ -33,6 +34,7 @@ export const loginController = async (req, res, next) => {
         res.status(200).json({
             message: "Logged in Successfully",
             token: token,
+            user: userFound,
         });
     } catch (error) {
         errorHandler(res, error);

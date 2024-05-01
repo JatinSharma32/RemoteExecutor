@@ -21,7 +21,10 @@ export const verifyToken = async (token) => {
     try {
         let decoded = jwt.verify(token, PRIVATE_KEY);
         console.log("Decoded Token: ", decoded);
-        decoded = await findUser(decoded);
+        const DBdata = await findUser(decoded);
+        if (DBdata.password !== decoded.password) {
+            throw createError("invalid token", 403);
+        }
         return { success: true, data: decoded };
     } catch (error) {
         console.log("Token Verification Error: ", error);

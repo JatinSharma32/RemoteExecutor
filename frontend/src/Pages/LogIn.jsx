@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import { useAuth } from "../contexts/authContext.jsx";
 
 const URL = "http://localhost:4000/login";
 
 const LogIn = () => {
+    const { token, setToken, setUser, logOut } = useAuth();
     const [password, setPassword] = useState("");
     const [loginStatus, setLoginStatus] = useState(null);
 
@@ -20,30 +22,39 @@ const LogIn = () => {
             }
         }
         console.log("User object: ", userObject);
-        Axios(URL, {
-            method: "POST",
-            data: {
-                userObject: userObject,
-            },
-        })
-            .then((data) => {
-                // Put this token into AuthContext
-                console.log("Then block: ", data);
-                setLoginStatus({
-                    message: data.data.message,
-                    borderColor: "border-green-600",
-                    bgColor: "bg-green-100",
-                    error: false,
-                });
+        if (email && password) {
+            Axios(URL, {
+                method: "POST",
+                data: {
+                    userObject: userObject,
+                },
             })
-            .catch((error) => {
-                setLoginStatus({
-                    message: error.response.data.error,
-                    borderColor: "border-red-600",
-                    bgColor: "bg-red-100",
-                    error: true,
+                .then((data) => {
+                    // Put this token into AuthContext
+                    setToken(data.data.token);
+                    setUser(JSON.stringify(data.data.user));
+                    setLoginStatus({
+                        message: data.data.message,
+                        borderColor: "border-green-600",
+                        bgColor: "bg-green-100",
+                        error: false,
+                    });
+                })
+                .catch((error) => {
+                    setLoginStatus({
+                        message: error.response.data.error,
+                        borderColor: "border-red-600",
+                        bgColor: "bg-red-100",
+                        error: true,
+                    });
                 });
-            });
+        }
+        setLoginStatus({
+            message: "Enter Credentials",
+            borderColor: "border-red-600",
+            bgColor: "bg-red-100",
+            error: true,
+        });
     };
 
     return (
@@ -93,6 +104,16 @@ const LogIn = () => {
                     </Link>
                 </p>
             </div>
+            {token && (
+                <span>
+                    <button
+                        className="w-full my-2 text-white bg-gradient-to-bl from-slate-500 to-slate-800 py-3 px-4 rounded-md"
+                        onClick={logOut}
+                    >
+                        Log Out
+                    </button>
+                </span>
+            )}
             {loginStatus ? (
                 <div
                     className={`rounded-md border-2  w-full px-8 py-4 mt-5 ${loginStatus.borderColor} ${loginStatus.bgColor}`}

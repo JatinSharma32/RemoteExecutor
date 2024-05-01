@@ -12,6 +12,12 @@ export const tokenVerification = async (req, res, next) => {
         }
         // Bearer <token>
         const token = authHeader.split(" ")[1];
+        if (token.length === 0) {
+            throw createError(
+                "Please Logged in before using this service",
+                403
+            );
+        }
         console.log("Token: ", token);
         // Token verification
         const verificationStatus = await verifyToken(token);

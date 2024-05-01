@@ -1,9 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import Editor from "@monaco-editor/react";
 import FileUpload from "../components/FileUpload.jsx";
+import { useAuth } from "../contexts/authContext.jsx";
 
 const Terminal = () => {
+    let { token, logOut } = useAuth();
+    if (!token) {
+        token = localStorage.getItem("token");
+    }
+    const navigate = useNavigate();
     const [code, setCode] = useState(
         "// Your code here\nconsole.log('Hello World!')"
     );
@@ -29,6 +36,9 @@ const Terminal = () => {
                 language: language,
                 user: { containerName: "jatin" },
             },
+            headers: {
+                authorization: `Bearer ${token}`,
+            },
         })
             .then((data) => {
                 setOutputPending(false);
@@ -43,10 +53,16 @@ const Terminal = () => {
                 }
             })
             .catch((err) => {
-                setOutputPending(false);
-                setOutput("SERVER ERROR: " + err.response?.data?.error);
-                setOutputError("bg-red-200 border-red-500 text-red-600");
-                console.log("Error occured: ", err);
+                // update here if the token auth fails then logout and redirect to login
+                if (err.response && err.response.status === 403) {
+                    logOut();
+                    navigate("/login");
+                } else {
+                    setOutputPending(false);
+                    setOutput("SERVER ERROR: " + err.response?.data?.error);
+                    setOutputError("bg-red-200 border-red-500 text-red-600");
+                    console.log("Error occured: ", err);
+                }
             });
     };
     const handleCodeChange = (newCode) => {

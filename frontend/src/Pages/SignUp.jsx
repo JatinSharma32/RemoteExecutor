@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import { useAuth } from "../contexts/authContext.jsx";
 
 const URL = "http://localhost:4000/signup";
 
 const SignUp = () => {
+    const { setToken, setUser } = useAuth();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [registrationStatus, setRegistrationStatus] = useState(null);
@@ -20,30 +22,39 @@ const SignUp = () => {
             }
         }
         console.log("User object: ", userObject);
-        Axios(URL, {
-            method: "POST",
-            data: {
-                userObject: userObject,
-            },
-        })
-            .then((data) => {
-                // Put this token into AuthContext
-                console.log("Then block: ", data);
-                setRegistrationStatus({
-                    message: data.data.message,
-                    borderColor: "border-green-600",
-                    bgColor: "bg-green-100",
-                    error: false,
-                });
+        if (password && email && username) {
+            Axios(URL, {
+                method: "POST",
+                data: {
+                    userObject: userObject,
+                },
             })
-            .catch((error) => {
-                setRegistrationStatus({
-                    message: error.response.data.error,
-                    borderColor: "border-red-600",
-                    bgColor: "bg-red-100",
-                    error: true,
+                .then((data) => {
+                    // Put this token into AuthContext
+                    setToken(data.data.token);
+                    setUser(JSON.stringify(data.data.user));
+                    setRegistrationStatus({
+                        message: data.data.message,
+                        borderColor: "border-green-600",
+                        bgColor: "bg-green-100",
+                        error: false,
+                    });
+                })
+                .catch((error) => {
+                    setRegistrationStatus({
+                        message: error.response.data.error,
+                        borderColor: "border-red-600",
+                        bgColor: "bg-red-100",
+                        error: true,
+                    });
                 });
-            });
+        }
+        setRegistrationStatus({
+            message: "Enter Credentials",
+            borderColor: "border-red-600",
+            bgColor: "bg-red-100",
+            error: true,
+        });
     };
 
     return (
