@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import { useAuth } from "../contexts/authContext.jsx";
-
-const URL = "http://localhost:4000/signup";
+import { BASE_URL } from "../constants.js";
 
 const SignUp = () => {
     const { setToken, setUser } = useAuth();
@@ -11,6 +10,7 @@ const SignUp = () => {
     const [password, setPassword] = useState("");
     const [registrationStatus, setRegistrationStatus] = useState(null);
     const [email, setEmail] = useState("");
+    const URL = `${BASE_URL}/signup`;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -80,7 +80,7 @@ const SignUp = () => {
                 </span>
                 <span>
                     <input
-                        type="text"
+                        type="email"
                         name="email"
                         value={email}
                         placeholder="E-mail address"
@@ -92,7 +92,7 @@ const SignUp = () => {
                 </span>
                 <span>
                     <input
-                        type="text"
+                        type="password"
                         name="password"
                         value={password}
                         placeholder="Password"

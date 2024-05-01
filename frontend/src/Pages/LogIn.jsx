@@ -2,15 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import { useAuth } from "../contexts/authContext.jsx";
-
-const URL = "http://localhost:4000/login";
+import { BASE_URL } from "../constants.js";
 
 const LogIn = () => {
     const { token, setToken, setUser, logOut } = useAuth();
     const [password, setPassword] = useState("");
     const [loginStatus, setLoginStatus] = useState(null);
-
     const [email, setEmail] = useState("");
+    const URL = `${BASE_URL}/login`;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -68,7 +67,7 @@ const LogIn = () => {
             <form onSubmit={handleSubmit} className="flex flex-col w-full my-2">
                 <span>
                     <input
-                        type="text"
+                        type="email"
                         name="email"
                         value={email}
                         placeholder="E-mail address"
@@ -80,7 +79,7 @@ const LogIn = () => {
                 </span>
                 <span>
                     <input
-                        type="text"
+                        type="password"
                         name="password"
                         value={password}
                         placeholder="Password"

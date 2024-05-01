@@ -4,6 +4,7 @@ import Axios from "axios";
 import Editor from "@monaco-editor/react";
 import FileUpload from "../components/FileUpload.jsx";
 import { useAuth } from "../contexts/authContext.jsx";
+import { BASE_URL } from "../constants.js";
 
 const Terminal = () => {
     let { token, logOut } = useAuth();
@@ -28,7 +29,7 @@ const Terminal = () => {
     const handleSubmit = () => {
         setOutputPending(true);
         Axios({
-            url: "http://localhost:4000/executor/",
+            url: `${BASE_URL}/executor/`,
             method: "post",
             data: {
                 code: code,
@@ -162,6 +163,11 @@ const Terminal = () => {
                     Submit
                 </button>
             )}
+            <div className="text-red-400 mt-5">
+                WARNING: Please ensure you are logged in before writing code.
+                Any changes may be lost during the redirection to the login
+                page, if you are not logged in.
+            </div>
         </div>
     );
 };

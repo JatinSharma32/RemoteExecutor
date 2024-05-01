@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
+import { BASE_URL } from "../constants.js";
 
 // complete the use Effect API code
 
@@ -8,7 +9,7 @@ const Problem = () => {
     const redirect = useNavigate();
     const { id } = useParams();
     const [problemData, setProblemData] = useState(null);
-    const URI = `http://localhost:4000/problem/${id}`;
+    const URI = `${BASE_URL}/problem/${id}`;
 
     useEffect(() => {
         Axios({ url: URI })
@@ -60,7 +61,7 @@ const Problem = () => {
                                         <h3 className="mb-4">
                                             <b>Example {i + 1}:</b>
                                         </h3>
-                                        {item.images.length > 0 &&
+                                        {item.images?.length > 0 &&
                                             item.images.map((images, j) => {
                                                 return (
                                                     <img

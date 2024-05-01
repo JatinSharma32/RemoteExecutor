@@ -6,6 +6,7 @@ import {
 import QuestionRow from "../components/QuestionRow";
 import Axios from "axios";
 import { useEffect, useState } from "react";
+import { BASE_URL } from "../constants.js";
 
 const Diffculity = new Map();
 
@@ -30,7 +31,7 @@ const Practise = () => {
     }
     useEffect(() => {
         Axios({
-            url: `http://localhost:4000/practise?size=${validateSize(
+            url: `${BASE_URL}/practise?size=${validateSize(
                 searchParams.get("size")
             )}&pageSet=${validatePageSet(searchParams.get("pageSet"))}`,
         }).then((data) => {
@@ -71,11 +72,8 @@ const Practise = () => {
                             <th className="p-3 text-gray-500 font-light w-52">
                                 Number
                             </th>
-                            <th className="p-3 text-gray-500 font-light w-1/2">
+                            <th className="p-3 text-gray-500 font-light w-3/4">
                                 Title
-                            </th>
-                            <th className="p-3 text-gray-500 font-light w-52">
-                                Solution
                             </th>
                             <th className="p-3 text-gray-500 font-light w-52">
                                 Diffculity

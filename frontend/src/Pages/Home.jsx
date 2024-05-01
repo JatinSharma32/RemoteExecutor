@@ -2,11 +2,12 @@ import { useLocation } from "react-router-dom";
 import Courses from "../components/Courses";
 import { useEffect, useState } from "react";
 import Axios from "axios";
+import { BASE_URL } from "../constants.js";
 
 const Home = () => {
     const [courseData, setCourseData] = useState(null);
     const { hash } = useLocation();
-    const URI = "http://localhost:4000/course/home";
+    const URI = `${BASE_URL}/course/home`;
 
     useEffect(() => {
         if (hash === "#explore") {

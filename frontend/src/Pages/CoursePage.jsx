@@ -1,12 +1,13 @@
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { BASE_URL } from "../constants.js";
 
 const CoursePage = () => {
     const navigate = useNavigate();
     const [coursesData, setCoursesData] = useState(null);
     const { id } = useParams();
-    const URI = `http://localhost:4000/course/${id}`;
+    const URI = `${BASE_URL}/course/${id}`;
     useEffect(() => {
         Axios({ url: URI })
             .then((data) => {
