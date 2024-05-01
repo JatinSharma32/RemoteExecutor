@@ -1,14 +1,49 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Axios from "axios";
+
+const URL = "http://localhost:4000/signup";
 
 const SignUp = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [registrationStatus, setRegistrationStatus] = useState(null);
     const [email, setEmail] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Event: ", e);
+        const userObject = {};
+        for (let i = 0; i < e.target.elements.length; i++) {
+            const item = e.target.elements[i];
+            if (item.value) {
+                userObject[item.name] = item.value;
+            }
+        }
+        console.log("User object: ", userObject);
+        Axios(URL, {
+            method: "POST",
+            data: {
+                userObject: userObject,
+            },
+        })
+            .then((data) => {
+                // Put this token into AuthContext
+                console.log("Then block: ", data);
+                setRegistrationStatus({
+                    message: data.data.message,
+                    borderColor: "border-green-600",
+                    bgColor: "bg-green-100",
+                    error: false,
+                });
+            })
+            .catch((error) => {
+                setRegistrationStatus({
+                    message: error.response.data.error,
+                    borderColor: "border-red-600",
+                    bgColor: "bg-red-100",
+                    error: true,
+                });
+            });
     };
 
     return (
@@ -23,7 +58,7 @@ const SignUp = () => {
                 <span>
                     <input
                         type="text"
-                        name="Username"
+                        name="username"
                         value={username}
                         placeholder="Username"
                         className="w-full my-2 py-3 px-4 rounded-md font-extralight border-x border-y"
@@ -35,7 +70,7 @@ const SignUp = () => {
                 <span>
                     <input
                         type="text"
-                        name="Email"
+                        name="email"
                         value={email}
                         placeholder="E-mail address"
                         className="w-full my-2 py-3 px-4 rounded-md font-extralight border-x border-y"
@@ -47,7 +82,7 @@ const SignUp = () => {
                 <span>
                     <input
                         type="text"
-                        name="Password"
+                        name="password"
                         value={password}
                         placeholder="Password"
                         className="w-full my-2 py-3 px-4 rounded-md font-extralight border-x border-y"
@@ -70,6 +105,13 @@ const SignUp = () => {
                     </Link>
                 </p>
             </div>
+            {registrationStatus ? (
+                <div
+                    className={`rounded-md border-2  w-full px-8 py-4 mt-5 ${registrationStatus.borderColor} ${registrationStatus.bgColor}`}
+                >
+                    {registrationStatus.message}
+                </div>
+            ) : null}
         </div>
     );
 };

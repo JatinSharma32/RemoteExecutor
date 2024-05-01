@@ -1,13 +1,49 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Axios from "axios";
+
+const URL = "http://localhost:4000/login";
 
 const LogIn = () => {
     const [password, setPassword] = useState("");
+    const [loginStatus, setLoginStatus] = useState(null);
+
     const [email, setEmail] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Event: ", e);
+        const userObject = {};
+        for (let i = 0; i < e.target.elements.length; i++) {
+            const item = e.target.elements[i];
+            if (item.value) {
+                userObject[item.name] = item.value;
+            }
+        }
+        console.log("User object: ", userObject);
+        Axios(URL, {
+            method: "POST",
+            data: {
+                userObject: userObject,
+            },
+        })
+            .then((data) => {
+                // Put this token into AuthContext
+                console.log("Then block: ", data);
+                setLoginStatus({
+                    message: data.data.message,
+                    borderColor: "border-green-600",
+                    bgColor: "bg-green-100",
+                    error: false,
+                });
+            })
+            .catch((error) => {
+                setLoginStatus({
+                    message: error.response.data.error,
+                    borderColor: "border-red-600",
+                    bgColor: "bg-red-100",
+                    error: true,
+                });
+            });
     };
 
     return (
@@ -22,7 +58,7 @@ const LogIn = () => {
                 <span>
                     <input
                         type="text"
-                        name="Email"
+                        name="email"
                         value={email}
                         placeholder="E-mail address"
                         className="w-full my-2 py-3 px-4 rounded-md font-extralight border-x border-y"
@@ -34,7 +70,7 @@ const LogIn = () => {
                 <span>
                     <input
                         type="text"
-                        name="Password"
+                        name="password"
                         value={password}
                         placeholder="Password"
                         className="w-full my-2 py-3 px-4 rounded-md font-extralight border-x border-y"
@@ -57,6 +93,13 @@ const LogIn = () => {
                     </Link>
                 </p>
             </div>
+            {loginStatus ? (
+                <div
+                    className={`rounded-md border-2  w-full px-8 py-4 mt-5 ${loginStatus.borderColor} ${loginStatus.bgColor}`}
+                >
+                    {loginStatus.message}
+                </div>
+            ) : null}
         </div>
     );
 };
