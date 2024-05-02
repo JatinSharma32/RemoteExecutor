@@ -76,7 +76,7 @@ const Practise = () => {
                                 Title
                             </th>
                             <th className="p-3 text-gray-500 font-light w-52">
-                                Diffculity
+                                Difficulty
                             </th>
                         </tr>
                     </thead>

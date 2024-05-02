@@ -61,7 +61,7 @@ const LogIn = () => {
             <div className="flex flex-col items-center">
                 <img src="/Design.png" className="w-20" alt="Logo" />
                 <h3 className="mt-2 text-lg font-medium san">
-                    Remote Executer
+                    Remote Executor
                 </h3>
             </div>
             <form onSubmit={handleSubmit} className="flex flex-col w-full my-2">
