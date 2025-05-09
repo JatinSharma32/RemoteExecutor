@@ -1,5 +1,5 @@
 import { errorHandler, createError } from "../utils/errorHandler.js";
-import data from "../../db/problems.json" assert { type: "json" };
+import data from "../../db/problems.json" with { type: "json" };
 
 export const ProblemDataByID = async (req, res, next) => {
     try {
