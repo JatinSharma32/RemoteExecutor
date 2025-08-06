@@ -7,7 +7,7 @@ import { useAuth } from "../contexts/authContext.jsx";
 import { BASE_URL } from "../constants.js";
 
 const Terminal = () => {
-    let { token, logOut } = useAuth();
+    let { token, logOut, user } = useAuth();
     if (!token) {
         token = localStorage.getItem("token");
     }
@@ -35,7 +35,7 @@ const Terminal = () => {
                 code: code,
                 input: input,
                 language: language,
-                user: { containerName: "jatin" },
+                user: { containerName: JSON.parse(user).username},
             },
             headers: {
                 authorization: `Bearer ${token}`,
