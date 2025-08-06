@@ -15,8 +15,6 @@ export const allCourses = async (req, res, next) => {
 export const individualCourse = async (req, res, next) => {
     try {
         const { id } = req.params;
-        console.log(id);
-
         for (const course of data) {
             if (course.courseName === id) {
                 return res.status(200).json(course);

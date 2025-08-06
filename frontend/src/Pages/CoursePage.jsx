@@ -11,7 +11,6 @@ const CoursePage = () => {
     useEffect(() => {
         Axios({ url: URI })
             .then((data) => {
-                console.log("course data: ", data);
                 setCoursesData(data.data);
             })
             .catch((error) => {

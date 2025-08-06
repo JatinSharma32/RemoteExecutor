@@ -8,7 +8,7 @@ class ExecutionService {
     codeExecution_CMD;
     #containerName;
     #imageName =
-        "8be8b370c9d31251b8291d82a8d40ebfdcbd15730969dad94e6da26a839000bb";
+        process.env.CONTAINER_NAME;
     containerStartUp = async (user) => {
         return new Promise((resolve, reject) => {
             exec(

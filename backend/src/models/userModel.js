@@ -30,7 +30,6 @@ export const findUser = async (userObject) => {
 export const createUser = async (userObject) => {
     try {
         const user = new User(userObject);
-        console.log("Model: ", user);
         await user.save();
         return user;
     } catch (error) {
