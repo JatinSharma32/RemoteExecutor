@@ -12,11 +12,10 @@ class ExecutionService {
     containerStartUp = async (user) => {
         return new Promise((resolve, reject) => {
             exec(
-                `docker run -it -d -m 100m --name ${this.#containerName} ${
-                    this.#imageName
-                }`,
-                (error, stdout, stderr) => {
+                `docker run --memory="256m" --cpus="1" --ulimit nproc=50 --ulimit nofile=100 --network none --tmpfs /tmp:size=50m --tmpfs /home:size=100m,exec,uid=65534,gid=65534 --user nobody --cap-drop=ALL --security-opt=no-new-privileges -it -d --name ${this.#containerName} ${this.#imageName}`,
+                { timeout: 60000 }, (error, stdout, stderr) => {
                     if (error) {
+                        console.log("new Commmand: ", error);
                         reject(createError("Container creation error", 500));
                     } else {
                         resolve(true);
@@ -28,11 +27,11 @@ class ExecutionService {
     fileCreation = async (user, fileCreation_CMD) => {
         return new Promise((resolve, reject) => {
             exec(
-                `docker exec ${
-                    this.#containerName
+                `docker exec ${this.#containerName
                 } sh -c "${fileCreation_CMD}"`,
-                (error, stdout, stderr) => {
+                { timeout: 60000 }, (error, stdout, stderr) => {
                     if (error) {
+                        console.log("New command error: ", error);
                         reject("Code file creation error");
                     } else {
                         resolve(true);
@@ -44,10 +43,9 @@ class ExecutionService {
     codeExecution = async (user) => {
         return new Promise((resolve, reject) => {
             exec(
-                `docker exec ${this.#containerName} sh -c "${
-                    this.codeExecution_CMD
+                `docker exec ${this.#containerName} sh -c "${this.codeExecution_CMD
                 }"`,
-                (error, stdout, stderr) => {
+                { timeout: 60000 }, (error, stdout, stderr) => {
                     if (error) {
                         resolve({ codeError: true, output: stderr });
                     } else {
@@ -60,10 +58,9 @@ class ExecutionService {
     containerStop = async (user) => {
         return new Promise((resolve, reject) => {
             exec(
-                `docker stop ${this.#containerName} && docker rm ${
-                    this.#containerName
+                `docker stop ${this.#containerName} && docker rm ${this.#containerName
                 }`,
-                (error, stdout, stderr) => {
+                { timeout: 60000 }, (error, stdout, stderr) => {
                     if (error) {
                         console.log(
                             "Container Not Stopped [FAILURE]: ",
@@ -108,26 +105,24 @@ class ExecutionService {
         switch (language) {
             case "python":
                 this.codeFileName = `code.py`;
-                this.codeExecution_CMD = `cd home && python code.py <input.txt && rm *`;
+                this.codeExecution_CMD = `cd /home && python code.py <input.txt && rm -f *`;
                 break;
             case "cpp":
                 this.codeFileName = `code.cpp`;
-                this.codeExecution_CMD = `cd home && g++ code.cpp -o useroutputfile && ./useroutputfile <input.txt && rm *`;
+                this.codeExecution_CMD = `cd /home && g++ code.cpp -o useroutputfile && ./useroutputfile <input.txt && rm -f *`;
                 break;
             case "java":
                 this.codeFileName = `code.java`;
-
-                this.codeExecution_CMD = `cd home && javac code.java && java ${javaClassName(
+                this.codeExecution_CMD = `cd /home && javac code.java && java ${javaClassName(
                     code
-                )} <input.txt && rm *`;
+                )} <input.txt && rm -f *`;
                 break;
-
             default:
                 this.codeFileName = `code.js`;
-                this.codeExecution_CMD = `cd home && node code.js <input.txt && rm *`;
+                this.codeExecution_CMD = `cd /home && node code.js <input.txt && rm -f *`;
                 break;
         }
-        return `cd home && echo '${base64Code}' | base64 -d > ${this.codeFileName} && echo '${base64Input}' | base64 -d > input.txt`;
+        return `cd /home && echo '${base64Code}' | base64 -d > ${this.codeFileName} && echo '${base64Input}' | base64 -d > input.txt`;
     };
 }
 
