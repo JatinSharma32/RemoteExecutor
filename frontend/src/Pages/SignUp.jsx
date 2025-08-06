@@ -21,7 +21,6 @@ const SignUp = () => {
                 userObject[item.name] = item.value;
             }
         }
-        console.log("User object: ", userObject);
         if (password && email && username) {
             Axios(URL, {
                 method: "POST",

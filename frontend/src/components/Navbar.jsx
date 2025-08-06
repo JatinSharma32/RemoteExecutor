@@ -4,7 +4,6 @@ import { useAuth } from "../contexts/authContext.jsx";
 const Navbar = () => {
     const { username } = useAuth();
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log(username, user);
     return (
         <div className="border-b border-b-slate-200 h-fit w-full px-24 shadow-sm flex justify-between items-center flex-initial flex-shrink-0 ">
             <div className=" h-fit flex items-center flex-initial flex-shrink-0 ">

@@ -44,7 +44,6 @@ const FileUpload = ({ setCode, setLanguage }) => {
             };
 
             reader.onloadend = async (e) => {
-                console.log("file read");
                 setCode(e.currentTarget.result ?? reader.result);
                 setFileUploadError({ error: false });
             };

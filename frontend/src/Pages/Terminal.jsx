@@ -43,7 +43,6 @@ const Terminal = () => {
         })
             .then((data) => {
                 setOutputPending(false);
-                console.log(data.data);
                 setOutput(data.data.output);
                 if (data.data.codeError) {
                     setOutputError(

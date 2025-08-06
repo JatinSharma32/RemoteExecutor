@@ -18,7 +18,6 @@ export const tokenVerification = async (req, res, next) => {
                 403
             );
         }
-        console.log("Token: ", token);
         // Token verification
         const verificationStatus = await verifyToken(token);
         if (!verificationStatus.success) {

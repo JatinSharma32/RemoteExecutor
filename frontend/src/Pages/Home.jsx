@@ -19,7 +19,6 @@ const Home = () => {
         Axios({ url: URI })
             .then((data) => {
                 setCourseData(data.data);
-                console.log(data.data);
             })
             .catch((error) => {
                 console.log("Error occured in loading courses data: ", error);

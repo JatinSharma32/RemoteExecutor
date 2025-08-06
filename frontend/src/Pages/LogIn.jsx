@@ -20,7 +20,7 @@ const LogIn = () => {
                 userObject[item.name] = item.value;
             }
         }
-        console.log("User object: ", userObject);
+        
         if (email && password) {
             Axios(URL, {
                 method: "POST",
