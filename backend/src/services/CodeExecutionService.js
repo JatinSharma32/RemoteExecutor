@@ -11,8 +11,30 @@ class ExecutionService {
         process.env.CONTAINER_NAME;
     containerStartUp = async (user) => {
         return new Promise((resolve, reject) => {
+            const dockerCommand = [
+                'docker run',
+                '--memory="256m"',
+                '--cpus="1"',
+                '--ulimit nproc=50',
+                '--ulimit nofile=100',
+                '--network none',
+                '--read-only',
+                '--tmpfs /tmp:size=50m,noexec',
+                '--tmpfs /workspace:size=100m,exec,uid=65534,gid=65534',
+                '--workdir=/workspace',
+                '--user nobody',
+                '--cap-drop=ALL',
+                '--security-opt=no-new-privileges',
+                '--security-opt=apparmor:unconfined',
+                '--pids-limit=50',
+                '--memory-swappiness=0',
+                '-it -d',
+                `--name ${this.#containerName}`,
+                this.#imageName,
+                'sh'
+            ].join(' ');
             exec(
-                `docker run --memory="256m" --cpus="1" --ulimit nproc=50 --ulimit nofile=100 --network none --tmpfs /tmp:size=50m --tmpfs /home:size=100m,exec,uid=65534,gid=65534 --user nobody --cap-drop=ALL --security-opt=no-new-privileges -it -d --name ${this.#containerName} ${this.#imageName}`,
+                dockerCommand,
                 { timeout: 60000 }, (error, stdout, stderr) => {
                     if (error) {
                         console.log("new Commmand: ", error);
@@ -45,7 +67,7 @@ class ExecutionService {
             exec(
                 `docker exec ${this.#containerName} sh -c "${this.codeExecution_CMD
                 }"`,
-                { timeout: 60000 }, (error, stdout, stderr) => {
+                { timeout: 30000 }, (error, stdout, stderr) => {
                     if (error) {
                         resolve({ codeError: true, output: stderr });
                     } else {
@@ -105,24 +127,22 @@ class ExecutionService {
         switch (language) {
             case "python":
                 this.codeFileName = `code.py`;
-                this.codeExecution_CMD = `cd /home && python code.py <input.txt && rm -f *`;
+                this.codeExecution_CMD = `python code.py <input.txt && rm -f *`;
                 break;
             case "cpp":
                 this.codeFileName = `code.cpp`;
-                this.codeExecution_CMD = `cd /home && g++ code.cpp -o useroutputfile && ./useroutputfile <input.txt && rm -f *`;
+                this.codeExecution_CMD = `g++ code.cpp -o useroutputfile && ./useroutputfile <input.txt && rm -f *`;
                 break;
             case "java":
                 this.codeFileName = `code.java`;
-                this.codeExecution_CMD = `cd /home && javac code.java && java ${javaClassName(
-                    code
-                )} <input.txt && rm -f *`;
+                this.codeExecution_CMD = `javac code.java && java ${javaClassName(code)} <input.txt && rm -f *`;
                 break;
             default:
                 this.codeFileName = `code.js`;
-                this.codeExecution_CMD = `cd /home && node code.js <input.txt && rm -f *`;
+                this.codeExecution_CMD = `node code.js <input.txt && rm -f *`;
                 break;
         }
-        return `cd /home && echo '${base64Code}' | base64 -d > ${this.codeFileName} && echo '${base64Input}' | base64 -d > input.txt`;
+        return `echo '${base64Code}' | base64 -d > ${this.codeFileName} && echo '${base64Input}' | base64 -d > input.txt`;
     };
 }
 

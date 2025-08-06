@@ -12,11 +12,23 @@ import Executor from "./routes/executor.route.js";
 const app = express();
 const PORT = process.env.PORT || 4000;
 export const URI = process.env.URI;
+export const FRONTEND = process.env.FRONTEND;
+export const ADMIN = process.env.ADMIN;
+
+const corsConfig = {
+    origin: (origin, callback) => {
+        if (origin === FRONTEND || origin === ADMIN) {
+            callback(null, true);
+        } else {
+            callback(new Error("CORS Error"), false);
+        }
+    }
+}
 
 // Update cors allowed origins for PROD env
 run();
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsConfig));
 
 app.use("/practise", Practise);
 app.use("/problem", Problem);
