@@ -30,6 +30,11 @@ export const findUser = async (userObject) => {
 export const createUser = async (userObject) => {
     try {
         const user = new User(userObject);
+        const preExistingUserNameCheck = await User.findOne({ username: userObject.username });
+        const preExistingEmailCheck = await User.findOne({ email: userObject.email });
+        if(preExistingUserNameCheck || preExistingEmailCheck){
+            throw {errorResponse:{code:11000}};
+        }
         await user.save();
         return user;
     } catch (error) {
