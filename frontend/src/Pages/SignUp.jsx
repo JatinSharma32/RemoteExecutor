@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { useAuth } from "../contexts/authContext.jsx";
 import { BASE_URL } from "../constants.js";
@@ -11,6 +11,7 @@ const SignUp = () => {
     const [registrationStatus, setRegistrationStatus] = useState(null);
     const [email, setEmail] = useState("");
     const URL = `${BASE_URL}/signup`;
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -38,6 +39,7 @@ const SignUp = () => {
                         bgColor: "bg-green-100",
                         error: false,
                     });
+                    navigate("/");
                 })
                 .catch((error) => {
                     setRegistrationStatus({
@@ -48,12 +50,14 @@ const SignUp = () => {
                     });
                 });
         }
-        setRegistrationStatus({
-            message: "Enter Credentials",
-            borderColor: "border-red-600",
-            bgColor: "bg-red-100",
-            error: true,
-        });
+        else {
+            setRegistrationStatus({
+                message: "Enter Credentials",
+                borderColor: "border-red-600",
+                bgColor: "bg-red-100",
+                error: true,
+            });
+        }
     };
 
     return (

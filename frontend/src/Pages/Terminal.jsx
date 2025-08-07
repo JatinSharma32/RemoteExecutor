@@ -35,7 +35,7 @@ const Terminal = () => {
                 code: code,
                 input: input,
                 language: language,
-                user: { containerName: JSON.parse(user).username},
+                user: { containerName: JSON.parse(user).username },
             },
             headers: {
                 authorization: `Bearer ${token}`,
@@ -82,6 +82,7 @@ const Terminal = () => {
     return (
         <div>
             <div className="flex justify-between items-center">
+
                 <select
                     name="language"
                     id="selectLanguage"
@@ -109,17 +110,25 @@ const Terminal = () => {
                     setLanguage={setLanguage}
                 ></FileUpload>
             </div>
-            <Editor
-                height="80vh"
-                width="100%"
-                language={language}
-                className="rounded-md "
-                defaultValue={code}
-                theme="vs-dark"
-                value={code}
-                onChange={handleCodeChange}
-                onMount={handleEditorMount}
-            />
+            <div className="rounded-md px-2 py-4 bg-[#1e1e1e]">
+
+                <Editor
+                    height="70vh"
+                    width="100%"
+                    language={language}
+                    className="rounded-md "
+                    defaultValue={code}
+                    theme="vs-dark"
+                    value={code}
+                    onChange={handleCodeChange}
+                    onMount={handleEditorMount}
+                />
+            </div>
+            {!token && (<div className="text-red-400 mt-5">
+                WARNING: Please ensure you are logged in before writing code.
+                Any changes may be lost during the redirection to the login
+                page, if you are not logged in.
+            </div>)}
             <div className="flex my-10 justify-between items-end">
                 <div className="flex-col flex mr-5">
                     <label htmlFor="input">Input:</label>
@@ -137,9 +146,8 @@ const Terminal = () => {
                 <div className="flex-col flex">
                     <label htmlFor="output">Output:</label>
                     <textarea
-                        className={`${
-                            outputError ?? "bg-gray-100"
-                        } border rounded-sm resize-none mt-2 p-4`}
+                        className={`${outputError ?? "bg-gray-100"
+                            } border rounded-sm resize-none mt-2 p-4`}
                         name="output"
                         id="output"
                         cols="80"
@@ -162,11 +170,7 @@ const Terminal = () => {
                     Submit
                 </button>
             )}
-            <div className="text-red-400 mt-5">
-                WARNING: Please ensure you are logged in before writing code.
-                Any changes may be lost during the redirection to the login
-                page, if you are not logged in.
-            </div>
+
         </div>
     );
 };
