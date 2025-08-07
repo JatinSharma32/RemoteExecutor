@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { useAuth } from "../contexts/authContext.jsx";
 import { BASE_URL } from "../constants.js";
@@ -10,6 +10,7 @@ const LogIn = () => {
     const [loginStatus, setLoginStatus] = useState(null);
     const [email, setEmail] = useState("");
     const URL = `${BASE_URL}/login`;
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -38,6 +39,7 @@ const LogIn = () => {
                         bgColor: "bg-green-100",
                         error: false,
                     });
+                    navigate("/")
                 })
                 .catch((error) => {
                     setLoginStatus({
@@ -48,12 +50,14 @@ const LogIn = () => {
                     });
                 });
         }
-        setLoginStatus({
-            message: "Enter Credentials",
-            borderColor: "border-red-600",
-            bgColor: "bg-red-100",
-            error: true,
-        });
+        else {
+            setLoginStatus({
+                message: "Enter Credentials",
+                borderColor: "border-red-600",
+                bgColor: "bg-red-100",
+                error: true,
+            });
+        }
     };
 
     return (
@@ -94,20 +98,23 @@ const LogIn = () => {
                             Sign In
                         </button>
                     </span>
-                    <div>
-                        <p className="text-sm text-gray-400 font-light">
-                            New user?
-                            <Link to="/signup" className="text-blue-900 text-base ml-1">
-                                Sign Up
-                            </Link>
-                        </p>
-                    </div>
+                    <p className="text-sm mt-8 text-center text-gray-400 font-light">
+                        New user?
+                        <Link to="/signup" className="text-blue-900 text-base ml-1">
+                            Sign Up
+                        </Link>
+                    </p>
                 </form>
             ) : (
                 <span>
                     <button
                         className="w-full my-2 text-white bg-gradient-to-bl from-slate-500 to-slate-800 py-3 px-4 rounded-md"
-                        onClick={logOut}
+                        onClick={
+                            () => {
+                                setLoginStatus(null)
+                                logOut()
+                            }
+                        }
                     >
                         Log Out
                     </button>
